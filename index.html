@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta name="theme-color" content="#090b18">
+  <meta name="description" content="年賀状をカメラに映して楽しむ、2027年のWebARメッセージ。">
+  <title>2027 New Year WebAR</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23b9142b'/%3E%3Cpath d='M14 40h36M20 31h24M26 22h12' stroke='%23f7d77a' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@ar-js-org/ar.js@3.4.7/aframe/build/aframe-ar.js"></script>
+</head>
+<body>
+  <main id="welcome" class="welcome">
+    <div class="crest" aria-hidden="true">二〇二七</div>
+    <p class="eyebrow">NEW YEAR MESSAGE</p>
+    <h1>あけまして<br>おめでとうございます</h1>
+    <p class="lead">年賀状のARマーカーを映すと、今年のメッセージが現れます。</p>
+    <button id="start" type="button">カメラを起動</button>
+    <button id="preview" class="secondary" type="button">カメラなしで見る</button>
+    <p class="privacy">映像は端末内で処理され、保存・送信されません。</p>
+  </main>
+
+  <section id="ar-ui" class="ar-ui" hidden aria-live="polite">
+    <div class="topbar">
+      <span id="status">年賀状のマーカーを映してください</span>
+      <button id="close" type="button" aria-label="AR画面を閉じる">×</button>
+    </div>
+    <div class="finder" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <p class="hint">マーカー全体が枠に入るように、ゆっくり動かしてください</p>
+  </section>
+
+  <section id="fallback" class="fallback" hidden>
+    <div class="rays" aria-hidden="true"></div>
+    <div class="message-card">
+      <span>謹 賀 新 年</span>
+      <strong>2027</strong>
+      <p>新しい一年が、発見と挑戦に満ちた<br>すてきな年になりますように。</p>
+      <small>HAPPY NEW YEAR</small>
+    </div>
+    <button id="back" type="button">もどる</button>
+  </section>
+
+  <div id="scene-wrap" hidden>
+    <a-scene
+      embedded
+      vr-mode-ui="enabled:false"
+      renderer="antialias:true; alpha:true; colorManagement:true"
+      arjs="sourceType:webcam; debugUIEnabled:false; detectionMode:mono; patternRatio:0.5">
+      <a-assets>
+        <a-mixin id="gold" material="color:#f7d77a; metalness:0.65; roughness:0.24"></a-mixin>
+      </a-assets>
+      <a-marker id="marker" preset="hiro" emitevents="true" smooth="true" smoothCount="8" smoothTolerance="0.01" smoothThreshold="3">
+        <a-entity position="0 0.55 0" rotation="-90 0 0">
+          <a-text value="HAPPY NEW YEAR" align="center" color="#fff7d6" width="3.8" position="0 .48 .05"></a-text>
+          <a-text value="2027" align="center" color="#f7d77a" width="5.2" position="0 -.05 .08"></a-text>
+          <a-ring mixin="gold" radius-inner=".62" radius-outer=".68" position="0 0 0" animation="property:rotation;to:0 0 360;dur:6500;loop:true;easing:linear"></a-ring>
+          <a-torus mixin="gold" radius=".9" radius-tubular=".022" position="0 0 -.03" animation="property:rotation;to:360 180 0;dur:7800;loop:true;easing:linear"></a-torus>
+          <a-sphere color="#b9142b" radius=".11" position="-.78 .55 .14" animation="property:position;to:.78 .55 .14;dur:2200;dir:alternate;loop:true;easing:easeInOutSine"></a-sphere>
+        </a-entity>
+      </a-marker>
+      <a-entity camera></a-entity>
+    </a-scene>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>
