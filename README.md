@@ -43,31 +43,6 @@ https://GITHUB_USERNAME.github.io/nenga-webar-2027/
 
 カメラが使用できない場合は、**カメラなしで見る** からメッセージを表示できます。
 
-## Deploy
-
-GitHubリポジトリの次の設定を使用します。
-
-```text
-Settings
-  → Pages
-  → Build and deployment
-  → Source: Deploy from a branch
-  → Branch: main
-  → Folder: / (root)
-```
-
-詳しい公開手順、QRコード作成手順、印刷時の確認事項は  
-`README_TOME.md` を参照してください。
-
-## Technology
-
-- HTML
-- CSS
-- JavaScript
-- A-Frame
-- AR.js
-- GitHub Pages
-
 ## Notes
 
 - WebARの利用時にはインターネット接続が必要です。
